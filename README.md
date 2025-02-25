@@ -20,7 +20,7 @@ The dataset is a fake CSV file that represents a list of users found in a databa
 
 ### Bonus points
 
-- Explain how would approach this task if the file were to contain millions of rows. Would your solution scale? If not, what changes would you make?
+- Explain how you would approach this task if the file were to contain millions of rows. Would your solution scale? If not, what changes would you make?
 - Some of the rows in the data contain errors, missing information, or in some cases missing passwords. How would you handle these situations in your solution?
 
 ### Available files:
