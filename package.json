@@ -1,0 +1,21 @@
+{
+  "name": "techtest-001",
+  "version": "1.0.0",
+  "description": "#### Version 1.1.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "setup": "./setup.sh",
+    "teardown": "./teardown.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "csv": "^6.3.11",
+    "json-2-csv": "^5.5.9",
+    "mysql2": "^3.14.1"
+  }
+}
