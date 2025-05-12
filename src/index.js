@@ -150,15 +150,19 @@ const processCSV = async (rainbowTable, outputJSON) => {
                      .pipe(parse({from_line: 2}))
                      
     for await (const row of reader){
+        //TODO: create a writable stream to make this scale to millions of rows
         outputJSON.push(mapCSVRecordToSchema(row, rainbowTable, outputJSON.length+1))
     }
 }
 
 const processJSON = async (connection, outputJSON) => {
+    //TODO: I couldn't get read stream to work for json files and I didn't want to spend
+    //a long time on it, but streaming in each row would be the only way to make this scalable
     const reader = await readFile("./files/users.json", {encoding: 'utf8'})
 
     for await (const row of reader.split('\n')){
         if(row === '') return // escape if row is ever empty
+        //TODO: create a writable stream to make this scale to millions of rows
         outputJSON.push(await mapJSONRecordToSchema(connection, JSON.parse(row), outputJSON.length + 1))
     }
 }
@@ -168,6 +172,11 @@ const processJSON = async (connection, outputJSON) => {
     try {
         const rainbow_table = await createRainbowTable()  
         const outputJSON = [];
+
+        //TODO: we could make the writable stream at this level and pass it in, that way we could
+        //try to parrellise these two functions.
+        //Prematurely optimising this however would make the data more difficult to debug
+        //which was more important for this exercise
         await processCSV(rainbow_table, outputJSON);
         await processJSON(databaseConnection, outputJSON);
         
